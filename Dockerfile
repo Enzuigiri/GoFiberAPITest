@@ -8,7 +8,7 @@ RUN go mod download
 
 COPY . .
 
-RUN cd ./src && go build -o /server-test
+RUN go build -o /server-test
 
 EXPOSE 8000
 
