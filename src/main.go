@@ -1,11 +1,21 @@
 package main
 
 import (
+	"fmt"
+
+	"github.com/Enzuigiri/GoFiberAPITest/test"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 )
 
+func Calc(x int) (result int) {
+	result = x + 2
+	return result
+}
+
 func main() {
+	fmt.Println(test.Print("enzu"))
+	fmt.Println(Calc(10))
 	app := fiber.New()
 	app.Use(logger.New())
 
