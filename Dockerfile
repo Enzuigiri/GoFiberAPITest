@@ -11,3 +11,5 @@ COPY . .
 RUN cd ./src && go build -o /server-test
 
 EXPOSE 8000
+
+ENTRYPOINT [ "/server-test" ]
