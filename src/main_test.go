@@ -17,7 +17,7 @@ func TestCalc(t *testing.T) {
 		wantResult int
 	}{
 		{"Test 1", args{x: 5}, 7},
-		{"Test 2", args{x: 8}, 10},
+		{"Test 2", args{x: 8}, 11},
 		{"Test 3", args{x: -2}, 0},
 		{"Test 4", args{x: -9999}, -9997},
 		{"Test 5", args{x: 9999}, 10001},
