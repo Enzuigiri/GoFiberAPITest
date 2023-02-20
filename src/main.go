@@ -13,8 +13,6 @@ func Calc(x int) (result int) {
 	return result
 }
 
-//
-
 func main() {
 	fmt.Println(test.Print("enzu"))
 	fmt.Println(Calc(10))
