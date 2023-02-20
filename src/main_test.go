@@ -1,6 +1,8 @@
 package main
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestSimpleCalc(t *testing.T) {
 	if Calc(2) != 4 {
@@ -30,3 +32,22 @@ func TestCalc(t *testing.T) {
 		})
 	}
 }
+
+// func Test_Handler(t *testing.T) {
+// 	app := fiber.New()
+
+// 	app.Get("/test", func(c *fiber.Ctx) error {
+// 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
+// 			"success": true,
+// 		})
+// 	})
+
+// 	resp, err := app.Test(httptest.NewRequest("GET", "/test", nil))
+
+// 	utils.AssertEqual(t, nil, err, "app.test")
+// 	utils.AssertEqual(t, 200, resp.StatusCode, "status_code")
+
+// 	body, err := io.ReadAll(resp.Body)
+
+// 	utils.AssertEqual(t, "success", body.success, "respond_body")
+// }
