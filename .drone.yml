@@ -1,11 +1,14 @@
 kind: pipeline
 type: docker
-name: default
+name: prodcution
 
 steps:
 - name: greeting
-  image: golang:1.20
+  image: golang:1.20-alpine
   commands:
     - "go build"
     - "go test ./src"
     - "go test ./test"
+  when:
+    event: [ push ]
+    branch: [ main ]
