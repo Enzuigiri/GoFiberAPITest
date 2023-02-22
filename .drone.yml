@@ -7,5 +7,5 @@ steps:
   image: golang:1.20-alpine
   commands:
     - "cd ./src && go build"
-    - "go test"
-    - "go test ../test"
+    - "go test -v"
+    - "go test ../test -v"
