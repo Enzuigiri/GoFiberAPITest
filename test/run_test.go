@@ -8,3 +8,5 @@ func TestPrint(t *testing.T) {
 		panic("Result is not Hello enzu")
 	}
 }
+
+//
