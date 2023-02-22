@@ -9,6 +9,3 @@ steps:
     - "go build"
     - "go test ./src"
     - "go test ./test"
-trigger:
-    event:
-    - push
