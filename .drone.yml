@@ -1,6 +1,6 @@
 kind: pipeline
 type: docker
-name: prodcution
+name: default
 
 steps:
 - name: greeting
@@ -9,6 +9,6 @@ steps:
     - "go build"
     - "go test ./src"
     - "go test ./test"
-  when:
-    event: [ push ]
-    branch: [ main ]
+trigger:
+    event:
+    - push
