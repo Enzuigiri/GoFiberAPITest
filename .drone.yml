@@ -9,13 +9,31 @@ steps:
     - "cd ./src && go build"
     - "go test -v"
     - "go test ../test -v"
-    
+
 - name: build
-  image: docker:20
+  image: docker:dind
   commands:
     - docker build -t my-golang-app .
+  volumes:
+  - name: dockersock
+    path: /var/run
 
 - name: run
-  image: docker:20
+  image: docker:dind
   commands:
     - docker run -d -p 8080:8080 my-golang-app
+  volumes:
+  - name: dockersock
+    path: /var/run
+
+services:
+- name: docker
+  image: docker:dind
+  privileged: true
+  volumes:
+  - name: dockersock
+    path: /var/run
+
+volumes:
+- name: dockersock
+  temp: {}
