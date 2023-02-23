@@ -16,5 +16,10 @@ steps:
     - docker build -t my-golang-app .
     - docker run -d -p 8080:8080 my-golang-app
   volumes:
-    - name: dockersock
-      path: /var/run
+    - name: docker_sock
+      path: /var/run/docker.sock
+
+volumes:
+  - name: docker_sock
+    host:
+      path: /var/run/docker.sock
