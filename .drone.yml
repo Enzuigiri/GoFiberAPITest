@@ -11,11 +11,11 @@ steps:
     - "go test ../test -v"
 
 - name: build
-  image: docker:20
+  image: plugins/docker
   commands:
     - docker build -t my-golang-app .
 
 - name: run
-  image: docker:20
+  image: plugins/docker
   commands:
     - docker run -d -p 8080:8080 my-golang-app
