@@ -9,3 +9,13 @@ steps:
     - "cd ./src && go build"
     - "go test -v"
     - "go test ../test -v"
+    
+- name: build
+  image: docker:20
+  commands:
+    - docker build -t my-golang-app .
+
+- name: run
+  image: docker:20
+  commands:
+    - docker run -d -p 8080:8080 my-golang-app
