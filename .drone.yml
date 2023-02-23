@@ -10,12 +10,11 @@ steps:
     - "go test -v"
     - "go test ../test -v"
 
-- name: build
-  image: plugins/docker
+- name: Build
+  image: docker
   commands:
     - docker build -t my-golang-app .
-
-- name: run
-  image: plugins/docker
-  commands:
     - docker run -d -p 8080:8080 my-golang-app
+  volumes:
+    - name: dockersock
+      path: /var/run
