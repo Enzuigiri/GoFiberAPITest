@@ -31,6 +31,35 @@ steps:
     - name: docker_sock
       path: /var/run/docker.sock
 
+- name: notify-fail
+  image: drillster/drone-email
+  settings:
+    host: smtp.gmail.com
+    username: 
+      from_secret: email_username
+    password: 
+      from_secret: email_password
+    from: drone@your-domain.com
+    subject: ${DRONE_BUILD_NUMBER} ${DRONE_REPO_LINK}
+    body: ${DRONE_COMMIT} ${DRONE_COMMIT_BRANCH} ${DRONE_COMMIT_AUTHOR} ${DRONE_REPO_OWNER} ${DRONE_REPO_NAME} ${DRONE_COMMIT_AUTHOR_EMAIL}
+    when:
+      status:
+        - failure
+
+- name: notify-success
+  image: drillster/drone-email
+  settings:
+    host: smtp.gmail.com
+    username: 
+      from_secret: email_username
+    password: 
+      from_secret: email_password
+    from: drone@your-domain.com
+    subject: ${DRONE_BUILD_NUMBER} ${DRONE_REPO_LINK}
+    body: ${DRONE_COMMIT} ${DRONE_COMMIT_BRANCH} ${DRONE_COMMIT_AUTHOR} ${DRONE_REPO_OWNER} ${DRONE_REPO_NAME} ${DRONE_COMMIT_AUTHOR_EMAIL}
+    when:
+      status:
+        - success
 volumes:
   - name: docker_sock
     host:
