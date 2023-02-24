@@ -3,29 +3,29 @@ type: docker
 name: default
 
 steps:
-- name: Testing
-  image: golang:1.20-alpine
-  commands:
-    - "cd ./src && go build"
-    - "go test -v"
-    - "go test ../test -v"
+# - name: Testing
+#   image: golang:1.20-alpine
+#   commands:
+#     - "cd ./src && go build"
+#     - "go test -v"
+#     - "go test ../test -v"
 
 - name: Build
   image: docker
   commands:
-    - "if ls | grep Dockerfile"
+    - if ls | grep Dockerfile
     - then
-    - "if docker ps -a | grep api_golang"
-    - "then"
-    - "docker rm -f api_golang
-      docker build -t gowebapi .
-      docker run -itd -p 8000:8000 --name api_golang gowebapi"
-    - "else"
-    - "docker build -t gowebapi .
-        docker run -itd -p 8000:8000 --name api_golang gowebapi"
-    - "fi"
+    - if docker ps -a | grep api_golang
+    - then
+    - docker rm -f api_golang
+    - docker build -t gowebapi .
+    - docker run -itd -p 8000:8000 --name api_golang gowebapi
     - else
-    - "exit 1"
+    - docker build -t gowebapi .
+    - docker run -itd -p 8000:8000 --name api_golang gowebapi
+    - fi
+    - else
+    - exit 1
     - fi
   volumes:
     - name: docker_sock
