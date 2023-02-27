@@ -33,6 +33,9 @@ steps:
 
 - name: notify-fail
   image: drillster/drone-email
+  when:
+    status:
+      - failure
   settings:
     host: smtp.gmail.com
     username: 
@@ -42,12 +45,13 @@ steps:
     from: drone@your-domain.com
     subject: ${DRONE_BUILD_NUMBER} ${DRONE_REPO_LINK}
     body: ${DRONE_COMMIT} ${DRONE_COMMIT_BRANCH} ${DRONE_COMMIT_AUTHOR} ${DRONE_REPO_OWNER} ${DRONE_REPO_NAME} ${DRONE_COMMIT_AUTHOR_EMAIL} Fail
-    trigger:
-      status:
-        - failure
+    
 
 - name: notify-success
   image: drillster/drone-email
+  when:
+    status:
+      - success
   settings:
     host: smtp.gmail.com
     username: 
@@ -57,9 +61,7 @@ steps:
     from: drone@your-domain.com
     subject: ${DRONE_BUILD_NUMBER} ${DRONE_REPO_LINK}
     body: ${DRONE_COMMIT} ${DRONE_COMMIT_BRANCH} ${DRONE_COMMIT_AUTHOR} ${DRONE_REPO_OWNER} ${DRONE_REPO_NAME} ${DRONE_COMMIT_AUTHOR_EMAIL} Success
-    trigger:
-      status:
-        - success
+    
 volumes:
   - name: docker_sock
     host:
