@@ -41,7 +41,7 @@ steps:
       from_secret: email_password
     from: drone@your-domain.com
     subject: ${DRONE_BUILD_NUMBER} ${DRONE_REPO_LINK}
-    body: ${DRONE_COMMIT} ${DRONE_COMMIT_BRANCH} ${DRONE_COMMIT_AUTHOR} ${DRONE_REPO_OWNER} ${DRONE_REPO_NAME} ${DRONE_COMMIT_AUTHOR_EMAIL}
+    body: ${DRONE_COMMIT} ${DRONE_COMMIT_BRANCH} ${DRONE_COMMIT_AUTHOR} ${DRONE_REPO_OWNER} ${DRONE_REPO_NAME} ${DRONE_COMMIT_AUTHOR_EMAIL} Fail
     when:
       status:
         - failure
@@ -56,7 +56,7 @@ steps:
       from_secret: email_password
     from: drone@your-domain.com
     subject: ${DRONE_BUILD_NUMBER} ${DRONE_REPO_LINK}
-    body: ${DRONE_COMMIT} ${DRONE_COMMIT_BRANCH} ${DRONE_COMMIT_AUTHOR} ${DRONE_REPO_OWNER} ${DRONE_REPO_NAME} ${DRONE_COMMIT_AUTHOR_EMAIL}
+    body: ${DRONE_COMMIT} ${DRONE_COMMIT_BRANCH} ${DRONE_COMMIT_AUTHOR} ${DRONE_REPO_OWNER} ${DRONE_REPO_NAME} ${DRONE_COMMIT_AUTHOR_EMAIL} Success
     when:
       status:
         - success
