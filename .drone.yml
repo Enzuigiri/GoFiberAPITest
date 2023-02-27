@@ -3,12 +3,12 @@ type: docker
 name: default
 
 steps:
-# - name: Testing
-#   image: golang:1.20-alpine
-#   commands:
-#     - "cd ./src && go build"
-#     - "go test -v"
-#     - "go test ../test -v"
+- name: Testing
+  image: golang:1.20-alpine
+  commands:
+    - "cd ./src && go build"
+    - "go test -v"
+    - "go test ../test -v"
 
 - name: Build
   image: docker
