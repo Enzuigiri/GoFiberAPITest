@@ -41,7 +41,7 @@ steps:
     port: 22
     commands_timeout: 2m
     script:
-      - whomai
+      - whoami
       - docker ps -a
     script_stop: true
   
