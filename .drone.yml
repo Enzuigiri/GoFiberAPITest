@@ -3,47 +3,47 @@ type: docker
 name: default
 
 steps:
-# - name: Testing
-#   image: golang:1.20-alpine
-#   commands:
-#     - "go test ./src -v"
-#     - "go test ./test -v"
+- name: Testing
+  image: golang:1.20-alpine
+  commands:
+    - "go test ./src -v"
+    - "go test ./test -v"
 
-# - name: Build
-#   image: docker
-#   commands:
-#     - if ls | grep Dockerfile
-#     - then
-#     - if docker ps -a | grep api_golang
-#     - then
-#     - docker rm -f api_golang
-#     - docker build -t gowebapi .
-#     - docker run -itd -p 8000:8000 --name api_golang gowebapi
-#     - else
-#     - docker build -t gowebapi .
-#     - docker run -itd -p 8000:8000 --name api_golang gowebapi
-#     - fi
-#     - else
-#     - exit 1
-#     - fi
-#   volumes:
-#     - name: docker_sock
-#       path: /var/run/docker.sock
+- name: Build
+  image: docker
+  commands:
+    - if ls | grep Dockerfile
+    - then
+    - if docker ps -a | grep api_golang
+    - then
+    - docker rm -f api_golang
+    - docker build -t gowebapi .
+    - docker run -itd -p 8000:8000 --name api_golang gowebapi
+    - else
+    - docker build -t gowebapi .
+    - docker run -itd -p 8000:8000 --name api_golang gowebapi
+    - fi
+    - else
+    - exit 1
+    - fi
+  volumes:
+    - name: docker_sock
+      path: /var/run/docker.sock
 
-- name: ssh-to-remote-server
-  image: appleboy/drone-ssh
-  settings:
-    host:
-      - 207.148.126.168
-    username: enzu_cicd
-    password:
-      from_secret: ssh_password
-    port: 22
-    commands_timeout: 2m
-    script:
-      - whoami
-      - docker ps -a
-    script_stop: true
+# - name: ssh-to-remote-server
+#   image: appleboy/drone-ssh
+#   settings:
+#     host:
+#       - 207.148.126.168
+#     username: enzu_cicd
+#     password:
+#       from_secret: ssh_password
+#     port: 22
+#     commands_timeout: 2m
+#     script:
+#       - whoami
+#       - docker ps -a
+#     script_stop: true
   
 - name: notify-fail
   image: drillster/drone-email
