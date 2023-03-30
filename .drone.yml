@@ -9,26 +9,26 @@ steps:
     - "go test ./src -v"
     - "go test ./test -v"
 
-- name: Build
-  image: docker
-  commands:
-    - if ls | grep Dockerfile
-    - then
-    - if docker ps -a | grep api_golang
-    - then
-    - docker rm -f api_golang
-    - docker build -t gowebapi .
-    - docker run -itd -p 8000:8000 --name api_golang gowebapi
-    - else
-    - docker build -t gowebapi .
-    - docker run -itd -p 8000:8000 --name api_golang gowebapi
-    - fi
-    - else
-    - exit 1
-    - fi
-  volumes:
-    - name: docker_sock
-      path: /var/run/docker.sock
+# - name: Build
+#   image: docker
+#   commands:
+#     - if ls | grep Dockerfile
+#     - then
+#     - if docker ps -a | grep api_golang
+#     - then
+#     - docker rm -f api_golang
+#     - docker build -t gowebapi .
+#     - docker run -itd -p 8000:8000 --name api_golang gowebapi
+#     - else
+#     - docker build -t gowebapi .
+#     - docker run -itd -p 8000:8000 --name api_golang gowebapi
+#     - fi
+#     - else
+#     - exit 1
+#     - fi
+#   volumes:
+#     - name: docker_sock
+#       path: /var/run/docker.sock
 
 # - name: ssh-to-remote-server
 #   image: appleboy/drone-ssh
