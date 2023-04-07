@@ -36,7 +36,7 @@ steps:
     host:
       - 207.148.126.168
     username:
-      from_secret: ssh_user
+      from_secret: ssh_username
     password:
       from_secret: ssh_password
     port: 22
