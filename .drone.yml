@@ -9,41 +9,42 @@ steps:
     - "go test ./src -v"
     - "go test ./test -v"
 
-# - name: Build
-#   image: docker
-#   commands:
-#     - if ls | grep Dockerfile
-#     - then
-#     - if docker ps -a | grep api_golang
-#     - then
-#     - docker rm -f api_golang
-#     - docker build -t gowebapi .
-#     - docker run -itd -p 8000:8000 --name api_golang gowebapi
-#     - else
-#     - docker build -t gowebapi .
-#     - docker run -itd -p 8000:8000 --name api_golang gowebapi
-#     - fi
-#     - else
-#     - exit 1
-#     - fi
-#   volumes:
-#     - name: docker_sock
-#       path: /var/run/docker.sock
+- name: Build
+  image: docker
+  commands:
+    - if ls | grep Dockerfile
+    - then
+    - if docker ps -a | grep api_golang
+    - then
+    - docker rm -f api_golang
+    - docker build -t gowebapi .
+    - docker run -itd -p 8000:8000 --name api_golang gowebapi
+    - else
+    - docker build -t gowebapi .
+    - docker run -itd -p 8000:8000 --name api_golang gowebapi
+    - fi
+    - else
+    - exit 1
+    - fi
+  volumes:
+    - name: docker_sock
+      path: /var/run/docker.sock
 
-# - name: ssh-to-remote-server
-#   image: appleboy/drone-ssh
-#   settings:
-#     host:
-#       - 207.148.126.168
-#     username: enzu_cicd
-#     password:
-#       from_secret: ssh_password
-#     port: 22
-#     commands_timeout: 2m
-#     script:
-#       - whoami
-#       - docker ps -a
-#     script_stop: true
+- name: ssh-to-remote-server
+  image: appleboy/drone-ssh
+  settings:
+    host:
+      - 207.148.126.168
+    username:
+      from_secret: ssh_user
+    password:
+      from_secret: ssh_password
+    port: 22
+    commands_timeout: 2m
+    script:
+      - whoami
+      - docker ps -a
+    script_stop: true
   
 - name: notify-fail
   image: drillster/drone-email
@@ -59,7 +60,6 @@ steps:
     recipients:
       - enzuao.08@gmail.com
       - habibsani123@gmail.com
-      - ridwanrahman11@sma.belajar.id
     from: drone@your-domain.com
     subject: ${DRONE_BUILD_NUMBER} ${DRONE_REPO_LINK}
     body: ${DRONE_COMMIT} ${DRONE_COMMIT_BRANCH} ${DRONE_COMMIT_AUTHOR} ${DRONE_REPO_OWNER} ${DRONE_REPO_NAME} ${DRONE_COMMIT_AUTHOR_EMAIL} Fail
@@ -79,7 +79,6 @@ steps:
     recipients:
       - enzuao.08@gmail.com
       - habibsani123@gmail.com
-      - ridwanrahman11@sma.belajar.id
     from: drone@your-domain.com
     subject: ${DRONE_BUILD_NUMBER} ${DRONE_REPO_LINK}
     body: ${DRONE_COMMIT} ${DRONE_COMMIT_BRANCH} ${DRONE_COMMIT_AUTHOR} ${DRONE_REPO_OWNER} ${DRONE_REPO_NAME} ${DRONE_COMMIT_AUTHOR_EMAIL} Success
